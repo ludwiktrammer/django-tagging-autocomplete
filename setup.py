@@ -8,7 +8,7 @@ setup(
     version='0.1',
     description='Autocompletion for django-tagging',
     long_description=long_description,
-    author='Jannis Leidel',
+    author='Ludwik Trammer',
     #author_email='',
     url='http://code.google.com/p/django-tagging-autocomplete/',
     packages=find_packages(),
