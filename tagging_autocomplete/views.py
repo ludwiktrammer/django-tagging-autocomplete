@@ -1,11 +1,13 @@
 from django.http import HttpResponse
-from django.core import serializers
+from django.utils.datastructures import MultiValueDictKeyError
 from tagging.models import Tag
+from django.utils import simplejson
 
 def list_tags(request):
-	try:
-		tags = Tag.objects.filter(name__istartswith=request.GET['q']).values_list('name', flat=True)
-	except MultiValueDictKeyError:
-		pass
-	
-	return HttpResponse('\n'.join(tags), mimetype='text/plain')
+    try:
+        tags = [ {'id': tag.id, 'label':tag.name, 'value': tag.name} for tag in Tag.objects.filter(name__istartswith=request.GET['term'])]
+    except MultiValueDictKeyError:
+        raise Http404
+
+    return HttpResponse(simplejson.dumps(tags), mimetype='text/json')
+
