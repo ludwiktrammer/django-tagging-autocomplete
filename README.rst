@@ -14,13 +14,8 @@ Setup
 
     python setup.py install
 
-2. Download `jquery-autocomplete` and put it in the folder specified in your
-   project's `MEDIA_URL` setting.
-   If you want to put it somewhere else add `TAGGING_AUTOCOMPLETE_JS_BASE_URL`
-   to your project settings.
-
-3. Add `tagging_autocomplete` to installed apps in your project's settings.
-4. Add the following line to your project's urls.py file::
+2. Add `tagging_autocomplete` to installed apps in your project's settings.
+3. Add the following line to your project's urls.py file::
 
     (r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
 
