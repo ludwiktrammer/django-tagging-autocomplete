@@ -10,9 +10,9 @@ Requirements
 
 Setup
 =====
-1. Download & Install::
+1. Download package and install, for example using pip::
 
-    python setup.py install
+    pip install django-tagging-autocomplete
 
 2. Add `tagging_autocomplete` to installed apps in your project's settings.
 3. Add the following line to your project's urls.py file::
