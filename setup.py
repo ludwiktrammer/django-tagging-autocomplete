@@ -4,16 +4,16 @@ from distutils.core import setup
 long_description = open('README.rst').read()
  
 setup(
-    name='django-tagging_autocomplete',
-    version='0.3.1',
+    name='django-tagging-autocomplete',
+    version='0.4',
     description='Autocompletion for django-tagging',
     long_description=long_description,
     author='Ludwik Trammer',
     author_email='ludwik@gmail.com',
-    url='http://code.google.com/p/django-tagging-autocomplete/',
+    url='https://github.com/ludwiktrammer/django-tagging-autocomplete/',
     packages=['tagging_autocomplete'],
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
