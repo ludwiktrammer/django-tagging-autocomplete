@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from distutils.core import setup
- 
+
 long_description = open('README.rst').read()
- 
+
 setup(
     name='django-tagging-autocomplete',
-    version='0.4',
+    version='0.4.2',
     description='Autocompletion for django-tagging',
     long_description=long_description,
     author='Ludwik Trammer',
@@ -20,13 +20,5 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Framework :: Django',
-    ],
-    package_data={
-        'tagging_autocomplete': [
-            'static/tagging_autocomplete/js/*.js',
-            'static/tagging_autocomplete/css/*.css',
-            'static/tagging_autocomplete/css/base/*.css',
-            'static/tagging_autocomplete/css/base/images/*.png',
-        ]
-    },
-) 
+    ]
+)
