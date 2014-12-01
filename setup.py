@@ -1,7 +1,18 @@
 # -*- coding: utf-8 -*-
+import os
 from distutils.core import setup
+from distutils.command.install import INSTALL_SCHEMES
 
 long_description = open('README.rst').read()
+
+# install data files where source files are installed
+for scheme in INSTALL_SCHEMES.values():
+    scheme['data'] = scheme['purelib']
+
+def find_data_files(filepath):
+    return sum([
+        [(path, [os.path.join(path, name)]) for name in names]
+            for path, _, names in os.walk(filepath)], [])
 
 setup(
     name='django-tagging-autocomplete',
@@ -12,6 +23,7 @@ setup(
     author_email='ludwik@gmail.com',
     url='https://github.com/ludwiktrammer/django-tagging-autocomplete/',
     packages=['tagging_autocomplete'],
+    data_files=find_data_files('tagging_autocomplete/static'),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',

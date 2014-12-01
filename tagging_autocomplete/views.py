@@ -17,4 +17,4 @@ def list_tags(request):
     except MultiValueDictKeyError:
         raise Http404
 
-    return HttpResponse(json.dumps(tags), mimetype='text/json')
+    return HttpResponse(json.dumps(tags), content_type='text/json')
