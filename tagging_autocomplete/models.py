@@ -15,6 +15,6 @@ class TagAutocompleteField(TagField):
 
         # As an ugly hack, we override the admin widget
         if defaults['widget'] == AdminTextInputWidget:
-            defaults['widget'] = TagAutocomplete
+            defaults['widget'] = TagAutocomplete(attrs={'class': 'vTextField'})
 
         return super(TagAutocompleteField, self).formfield(**defaults)
