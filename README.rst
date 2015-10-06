@@ -51,3 +51,9 @@ By default the maximum number of results suggested by the autocompletion is 100.
 You can modify this number by adding to your `settings.py` project file the `MAX_NUMBER_OF_RESULTS` constant.
 For example::
     MAX_NUMBER_OF_RESULTS = 5
+
+By default autocompletion suggests tags that *start with* a given term.
+In case you need to show ones that *contain* the given term,
+set `TAGGING_AUTOCOMPLETE_SEARCH_CONTAINS` to `True`.
+For example::
+    TAGGING_AUTOCOMPLETE_SEARCH_CONTAINS = True
