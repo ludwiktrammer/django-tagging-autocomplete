@@ -11,10 +11,14 @@ except ImportError:
 
 def list_tags(request):
     max_results = getattr(settings, 'MAX_NUMBER_OF_RESULTS', 100)
+    search_contains = getattr(settings, 'TAGGING_AUTOCOMPLETE_SEARCH_CONTAINS', False)
     try:
-        tags = [{'id': tag.id, 'label': tag.name, 'value': tag.name}
-                for tag in Tag.objects.filter(name__istartswith=request.GET['term'])[:max_results]]
+        term = request.GET['term']
     except MultiValueDictKeyError:
         raise Http404
-
+    if search_contains:
+        objects = Tag.objects.filter(name__icontains=term)
+    else:
+        objects = Tag.objects.filter(name__istartswith=term)
+    tags = [{'id': tag.id, 'label': tag.name, 'value': tag.name} for tag in objects[:max_results]]
     return HttpResponse(json.dumps(tags), content_type='text/json')
