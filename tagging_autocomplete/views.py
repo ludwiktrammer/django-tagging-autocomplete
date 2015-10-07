@@ -10,7 +10,11 @@ except ImportError:
 
 
 def list_tags(request):
-    max_results = getattr(settings, 'MAX_NUMBER_OF_RESULTS', 100)
+    # Note that ``MAX_NUMBER_OF_RESULTS`` is deprecated.
+    # Consider using ``TAGGING_AUTOCOMPLETE_MAX_RESULTS`` instead.
+    max_results = getattr(
+        settings, 'TAGGING_AUTOCOMPLETE_MAX_RESULTS',
+        getattr(settings, 'MAX_NUMBER_OF_RESULTS', 100))
     search_contains = getattr(settings, 'TAGGING_AUTOCOMPLETE_SEARCH_CONTAINS', False)
     try:
         term = request.GET['term']
