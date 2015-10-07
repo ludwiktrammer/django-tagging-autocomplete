@@ -16,7 +16,7 @@ def find_data_files(filepath):
 
 setup(
     name='django-tagging-autocomplete',
-    version='0.4.2',
+    version='0.5.0',
     description='Autocompletion for django-tagging',
     long_description=long_description,
     author='Ludwik Trammer',
