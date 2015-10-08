@@ -29,6 +29,7 @@ class TagAutocomplete(Input):
         term: extractLast( request.term )
         }, response );
         },
+        minLength: %s,
         focus: function() {
         // prevent value inserted on focus
         return false;
@@ -46,7 +47,8 @@ class TagAutocomplete(Input):
         }
         });
         });
-        </script>''' % (attrs['id'], json_view)
+        </script>''' % (attrs['id'], json_view,
+                        getattr(settings, 'TAGGING_AUTOCOMPLETE_MIN_LENGTH', 1))
         return mark_safe("\n".join([html, js]))
 
     class Media:
