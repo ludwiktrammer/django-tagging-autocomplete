@@ -1,7 +1,7 @@
+from tagging.models import Tag
 from django.conf import settings
 from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
-from tagging.models import Tag
 from django.http import Http404
 try:
     import json

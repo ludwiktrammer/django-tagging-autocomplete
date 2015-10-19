@@ -3,9 +3,25 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.utils.safestring import mark_safe
 
+
 class TagAutocomplete(Input):
     input_type = 'text'
-	
+
+    class Media:
+        css = {
+            'all': (
+                'tagging_autocomplete/css/base/jquery.ui.all.css',
+                'tagging_autocomplete/css/tagging_autocomplete.css',
+            )
+        }
+        js = (
+            getattr(settings, 'JQUERY_URL', 'tagging_autocomplete/js/jquery-1.6.2.min.js'),
+            'tagging_autocomplete/js/jquery.ui.core.min.js',
+            'tagging_autocomplete/js/jquery.ui.position.min.js',
+            'tagging_autocomplete/js/jquery.ui.widget.min.js',
+            'tagging_autocomplete/js/jquery.ui.autocomplete.min.js',
+        )
+
     def render(self, name, value, attrs=None):
         json_view = reverse('tagging_autocomplete-list')
         html = super(TagAutocomplete, self).render(name, value, attrs)
@@ -47,20 +63,4 @@ class TagAutocomplete(Input):
             });
         </script>''' % (attrs['id'], json_view,
                         getattr(settings, 'TAGGING_AUTOCOMPLETE_MIN_LENGTH', 1))
-        return mark_safe("\n".join([html, js]))
-
-    class Media:
-        css = {
-            'all': (
-                'tagging_autocomplete/css/base/jquery.ui.all.css',
-                'tagging_autocomplete/css/tagging_autocomplete.css',
-                )
-        }
-
-        js = (
-            getattr(settings,'JQUERY_URL','tagging_autocomplete/js/jquery-1.6.2.min.js'),
-            'tagging_autocomplete/js/jquery.ui.core.min.js',
-            'tagging_autocomplete/js/jquery.ui.position.min.js',
-            'tagging_autocomplete/js/jquery.ui.widget.min.js',
-            'tagging_autocomplete/js/jquery.ui.autocomplete.min.js',
-)
+        return mark_safe('\n'.join([html, js]))
