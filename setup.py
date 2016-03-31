@@ -1,29 +1,22 @@
-# -*- coding: utf-8 -*-
 import os
-from distutils.core import setup
-from distutils.command.install import INSTALL_SCHEMES
+from setuptools import find_packages, setup
 
-long_description = open('README.rst').read()
+with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
+    README = readme.read()
 
-# install data files where source files are installed
-for scheme in INSTALL_SCHEMES.values():
-    scheme['data'] = scheme['purelib']
-
-def find_data_files(filepath):
-    return sum([
-        [(path, [os.path.join(path, name)]) for name in names]
-            for path, _, names in os.walk(filepath)], [])
+# allow setup.py to be run from any path
+os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-tagging-autocomplete',
-    version='0.5.0',
+    version='0.5.1',
     description='Autocompletion for django-tagging',
-    long_description=long_description,
+    long_description=README,
     author='Ludwik Trammer',
     author_email='ludwik@gmail.com',
     url='https://github.com/ludwiktrammer/django-tagging-autocomplete/',
-    packages=['tagging_autocomplete'],
-    data_files=find_data_files('tagging_autocomplete/static'),
+    packages=find_packages(),
+    include_package_data=True,
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
