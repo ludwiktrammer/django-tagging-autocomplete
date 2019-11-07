@@ -1,31 +1,35 @@
 from django.forms.widgets import Input
-from django.core.urlresolvers import reverse
+
+try:
+    from django.core.urlresolvers import reverse
+except ImportError:
+    from django.urls import reverse
 from django.conf import settings
 from django.utils.safestring import mark_safe
 
 
 class TagAutocomplete(Input):
-    input_type = 'text'
+    input_type = "text"
 
     class Media:
         css = {
-            'all': (
-                'tagging_autocomplete/css/base/jquery.ui.all.css',
-                'tagging_autocomplete/css/tagging_autocomplete.css',
+            "all": (
+                "tagging_autocomplete/css/base/jquery.ui.all.css",
+                "tagging_autocomplete/css/tagging_autocomplete.css",
             )
         }
         js = (
-            getattr(settings, 'JQUERY_URL', 'tagging_autocomplete/js/jquery-1.6.2.min.js'),
-            'tagging_autocomplete/js/jquery.ui.core.min.js',
-            'tagging_autocomplete/js/jquery.ui.position.min.js',
-            'tagging_autocomplete/js/jquery.ui.widget.min.js',
-            'tagging_autocomplete/js/jquery.ui.autocomplete.min.js',
+            getattr(settings, "JQUERY_URL", "tagging_autocomplete/js/jquery-1.6.2.min.js"),
+            "tagging_autocomplete/js/jquery.ui.core.min.js",
+            "tagging_autocomplete/js/jquery.ui.position.min.js",
+            "tagging_autocomplete/js/jquery.ui.widget.min.js",
+            "tagging_autocomplete/js/jquery.ui.autocomplete.min.js",
         )
 
-    def render(self, name, value, attrs=None):
-        json_view = reverse('tagging_autocomplete-list')
-        html = super(TagAutocomplete, self).render(name, value, attrs)
-        js = u'''<script type="text/javascript">
+    def render(self, name, value, attrs=None, *args, **kwargs):
+        json_view = reverse("tagging_autocomplete-list")
+        html = super(TagAutocomplete, self).render(name, value, attrs, *args, **kwargs)
+        js = u"""<script type="text/javascript">
             function split(val) {
                 return val.split(/,\s*/);
             }
@@ -61,6 +65,9 @@ class TagAutocomplete(Input):
                     }
                 });
             });
-        </script>''' % (attrs['id'], json_view,
-                        getattr(settings, 'TAGGING_AUTOCOMPLETE_MIN_LENGTH', 1))
-        return mark_safe('\n'.join([html, js]))
+        </script>""" % (
+            attrs["id"],
+            json_view,
+            getattr(settings, "TAGGING_AUTOCOMPLETE_MIN_LENGTH", 1),
+        )
+        return mark_safe("\n".join([html, js]))
