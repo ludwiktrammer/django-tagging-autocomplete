@@ -64,4 +64,5 @@ For example::
 By default suggestions are shown right after you enter first character.
 You can configure this behaviour using `TAGGING_AUTOCOMPLETE_MIN_LENGTH`.
 For example::
+
     TAGGING_AUTOCOMPLETE_MIN_LENGTH = 3
